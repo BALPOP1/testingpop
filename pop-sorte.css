@@ -208,18 +208,17 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
   color: #ffffff;
 }
 
-/* Make all text white except number badges */
-.marquee-balls > span:not(.number-badge),
+/* Make main marquee text white, but exclude winner-info container */
+.marquee-balls > span:not(.number-badge):not(.winner-info),
 .marquee-balls #marqueePrefix,
-.marquee-balls #marqueeSuffix,
-.marquee-balls .winner-info,
-.marquee-balls .winner-info > span:not(.number-badge) {
+.marquee-balls #marqueeSuffix {
   color: #ffffff !important;
 }
 
-/* Keep number badges with their original colors - they have their own color classes */
-.marquee-balls .number-badge {
-  /* Number badges keep their original colors from ball-color-* classes */
+/* Winner info container and its children keep their original colors (inline styles take precedence) */
+.marquee-balls .winner-info,
+.marquee-balls .winner-info * {
+  color: inherit;
 }
 
 .marquee-link {
@@ -1035,7 +1034,7 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
   position: fixed;
   z-index: 2000;
   left: 50%;
-  bottom: 60px;
+  bottom: 75px;
   transform: translateX(-50%);
   font-size: 0.95rem;
   font-weight: 700;

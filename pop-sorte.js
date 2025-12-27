@@ -270,7 +270,7 @@ async function fetchAndPopulateResults() {
 
             const winnersTitle = document.createElement('span');
             winnersTitle.innerHTML = '<b>GANHADOR(ES):</b> ';
-            winnersTitle.style.color = '#ffffff';
+            winnersTitle.style.color = '#cb24e9ff';
             winnersTitle.style.marginRight = '8px';
             marqueeBalls.appendChild(winnersTitle);
 
@@ -280,14 +280,14 @@ async function fetchAndPopulateResults() {
                 winTag.style.display = 'inline-flex';
                 winTag.style.alignItems = 'center';
                 winTag.style.gap = '6px';
-                winTag.style.background = 'rgba(255, 255, 255, 0.1)';
+                winTag.style.background = 'linear-gradient(180deg, #FFF 0%, #FFF 50%, #FFF 100%)';
                 winTag.style.animation = 'pulseWinner 1.2s ease-in-out infinite';
                 winTag.style.padding = '3px 10px';
                 winTag.style.borderRadius = '8px';
-                winTag.style.border = '2px solid rgba(255, 255, 255, 0.3)';
+                winTag.style.border = '2px solid #cb24e9ff';
                 winTag.style.fontSize = '0.85rem';
                 winTag.style.marginRight = '12px';
-                winTag.style.color = '#ffffff';
+                winTag.style.color = '#1e293b';
                 winTag.style.cursor = 'pointer';
                 winTag.title = 'Clique para ver detalhes do ganhador';
 
@@ -295,9 +295,9 @@ async function fetchAndPopulateResults() {
                 const winDate = (win.drawDate || '').split(' ')[0];
                 
                 // Construct inner HTML with Game ID and Date
-                let innerHTML = `<span style="font-weight:800; color:#ffffff;">ID: ${gameIdShort}</span> ` +
-                               `<span style="opacity:0.9; font-size:0.75rem; color:#ffffff;">(${winDate})</span> ` +
-                               `<span style="color:#ffffff; font-weight:700;">[</span>`;
+                let innerHTML = `<span style="font-weight:800; color:#6c2bd9;">ID: ${gameIdShort}</span> ` +
+                               `<span style="opacity:0.7; font-size:0.75rem;">(${winDate})</span> ` +
+                               `<span style="color:#b45309; font-weight:700;">[</span>`;
                 
                 // Add numbers with conditional ball badge styling
                 win.chosenNumbers.forEach((num, idx) => {
@@ -307,15 +307,15 @@ async function fetchAndPopulateResults() {
                                      `<span class="number-text">${num.toString().padStart(2, '0')}</span>` +
                                      `</div>`;
                     } else {
-                        innerHTML += `<span style="margin:0 2px; color:#ffffff;">${num.toString().padStart(2, '0')}</span>`;
+                        innerHTML += `<span style="margin:0 2px;">${num.toString().padStart(2, '0')}</span>`;
                     }
                     
                     if (idx < win.chosenNumbers.length - 1) {
-                        innerHTML += `<span style="opacity:0.7; color:#ffffff;">,</span>`;
+                        innerHTML += `<span style="opacity:0.5;">,</span>`;
                     }
                 });
                 
-                innerHTML += `<span style="color:#ffffff; font-weight:700;">]</span>`;
+                innerHTML += `<span style="color:#b45309; font-weight:700;">]</span>`;
                 winTag.innerHTML = innerHTML;
                 
                 // Add click event to scroll to winners carousel section
