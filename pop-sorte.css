@@ -1256,7 +1256,7 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
 /* FLOATING WHATSAPP BUTTON */
 .floating-whatsapp {
   position: fixed;
-  bottom: 80px;
+  bottom: 90px;
   right: 24px;
   width: 64px;
   height: 64px;
