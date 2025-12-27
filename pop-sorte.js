@@ -9,7 +9,26 @@ const CONCURSO_REFERENCE = {
 // Helper to get current time in Brazil timezone
 function getBrazilTime() {
     const now = new Date();
-    return new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+    // Use Intl.DateTimeFormat to get Brazil time components
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+    const parts = formatter.formatToParts(now);
+    const year = parts.find(p => p.type === 'year').value;
+    const month = parts.find(p => p.type === 'month').value;
+    const day = parts.find(p => p.type === 'day').value;
+    const hour = parts.find(p => p.type === 'hour').value;
+    const minute = parts.find(p => p.type === 'minute').value;
+    const second = parts.find(p => p.type === 'second').value;
+    // Create date in Brazil timezone explicitly
+    return new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}-03:00`);
 }
 
 // Helper to format date/time in Brazil timezone
@@ -23,10 +42,17 @@ function formatBrazilDateTime(date, options = {}) {
 
 // Helper to get YYYY-MM-DD in Brazil timezone
 function getBrazilDateString(date) {
-    const spDate = new Date(date.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
-    const year = spDate.getFullYear();
-    const month = String(spDate.getMonth() + 1).padStart(2, '0');
-    const day = String(spDate.getDate()).padStart(2, '0');
+    // Use Intl.DateTimeFormat to get Brazil date components
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Sao_Paulo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+    const parts = formatter.formatToParts(date);
+    const year = parts.find(p => p.type === 'year').value;
+    const month = parts.find(p => p.type === 'month').value;
+    const day = parts.find(p => p.type === 'day').value;
     return `${year}-${month}-${day}`;
 }
 
@@ -87,8 +113,7 @@ function getNextValidDrawDate(fromDate) {
 }
 
 function getCurrentDrawSchedule() {
-    const now = new Date();
-    const spNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+    const spNow = getBrazilTime(); // Use corrected Brazil time function
     const todayStr = getBrazilDateString(spNow);
     const today = new Date(`${todayStr}T00:00:00-03:00`);
 
@@ -1087,14 +1112,13 @@ function hideToast() {
 // ✅ CORRECT - Force Brazil timezone
 function initCountdown() {
     function updateCountdown() {
-        const now = new Date();
-        const spTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+        const spTime = getBrazilTime(); // Use corrected Brazil time function
         
         const schedule = getCurrentDrawSchedule();
         
         // Build target time with explicit Brazil timezone
         const drawDateStr = getBrazilDateString(schedule.drawDate);
-        const targetTime = new Date(`${drawDateStr}T${schedule.drawHour. toString().padStart(2, '0')}:00:00-03:00`);
+        const targetTime = new Date(`${drawDateStr}T${schedule.drawHour.toString().padStart(2, '0')}:00:00-03:00`);
         
         const diff = targetTime - spTime;
         
