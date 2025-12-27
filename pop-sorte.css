@@ -123,15 +123,43 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
 .results-marquee {
   background:
     linear-gradient(180deg, #f97316 45%, #3a1b04 50%, #f97316 55%) 0 0 / 200% 3px no-repeat,
-    transparent;
+    linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%);
   border-top: 10px solid transparent;
   padding-top: 15px;
+  padding-bottom: 15px;
   padding-left: 10px;
   padding-right: 10px;
   overflow: hidden;
   position: relative;
   display: flex;
   width: 100%;
+}
+
+.results-marquee.sticky-marquee {
+  position: sticky;
+  bottom: 0;
+  z-index: 1100;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+  border-top: 3px solid transparent;
+  background-image: 
+    linear-gradient(180deg, #f97316 45%, #3a1b04 50%, #f97316 55%) 0 0 / 200% 3px no-repeat,
+    linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%),
+    linear-gradient(90deg,
+      #4c1d95 0%,
+      #312e81 25%,
+      #facc15 50%,
+      #d97706 75%,
+      #4c1d95 100%,
+      #312e81 125%,
+      #facc15 150%,
+      #d97706 175%,
+      #4c1d95 200%
+    );
+  background-origin: border-box;
+  background-clip: padding-box, padding-box, border-box;
+  background-size: 200% 3px, 100% 100%, 400% 4px;
+  background-position: 0 0, 0 0, 0 0;
+  animation: stickyBorderFlow 8s linear infinite;
 }
 
 .marquee-content {
