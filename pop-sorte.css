@@ -121,9 +121,9 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
 }
 
 .results-marquee {
-  background:
-    linear-gradient(180deg, #f97316 45%, #3a1b04 50%, #f97316 55%) 0 0 / 200% 3px no-repeat,
-    linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%);
+  background: linear-gradient(135deg, #0f172a, #2b1b6f, #32031f, #0f172a);
+  background-size: 280% 280%;
+  animation: marqueeGradient 18s ease-in-out infinite;
   border-top: 10px solid transparent;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -139,11 +139,9 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
   position: sticky;
   bottom: 0;
   z-index: 1100;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.3);
   border-top: 3px solid transparent;
   background-image: 
-    linear-gradient(180deg, #f97316 45%, #3a1b04 50%, #f97316 55%) 0 0 / 200% 3px no-repeat,
-    linear-gradient(180deg, #f9fafb 0%, #eef2ff 100%),
     linear-gradient(90deg,
       #4c1d95 0%,
       #312e81 25%,
@@ -154,12 +152,25 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
       #facc15 150%,
       #d97706 175%,
       #4c1d95 200%
-    );
+    ),
+    linear-gradient(135deg, #0f172a, #2b1b6f, #32031f, #0f172a);
   background-origin: border-box;
-  background-clip: padding-box, padding-box, border-box;
-  background-size: 200% 3px, 100% 100%, 400% 4px;
-  background-position: 0 0, 0 0, 0 0;
-  animation: stickyBorderFlow 8s linear infinite;
+  background-clip: border-box, padding-box;
+  background-size: 400% 4px, 280% 280%;
+  background-position: 0 0, 0% 50%;
+  animation: stickyBorderFlow 8s linear infinite, marqueeGradient 18s ease-in-out infinite;
+}
+
+@keyframes marqueeGradient {
+  0% { 
+    background-position: 0 0, 0% 50%;
+  }
+  50% { 
+    background-position: 0 0, 100% 50%;
+  }
+  100% { 
+    background-position: 0 0, 0% 50%;
+  }
 }
 
 .marquee-content {
@@ -184,7 +195,7 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
 .marquee-text {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #6c2bd9;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -194,12 +205,28 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
   display: flex;
   gap: 6px;
   align-items: center;
+  color: #ffffff;
+}
+
+/* Make all text white except number badges */
+.marquee-balls > span:not(.number-badge),
+.marquee-balls #marqueePrefix,
+.marquee-balls #marqueeSuffix,
+.marquee-balls .winner-info,
+.marquee-balls .winner-info > span:not(.number-badge) {
+  color: #ffffff !important;
+}
+
+/* Keep number badges with their original colors - they have their own color classes */
+.marquee-balls .number-badge {
+  /* Number badges keep their original colors from ball-color-* classes */
 }
 
 .marquee-link {
-  color: #3b82f6;
+  color: #ffffff;
   text-decoration: underline;
   font-weight: 800;
+  opacity: 0.9;
 }
 
 .marquee-balls .number-badge {
@@ -1008,7 +1035,7 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
   position: fixed;
   z-index: 2000;
   left: 50%;
-  bottom: 50px;
+  bottom: 60px;
   transform: translateX(-50%);
   font-size: 0.95rem;
   font-weight: 700;
@@ -1230,7 +1257,7 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
 /* FLOATING WHATSAPP BUTTON */
 .floating-whatsapp {
   position: fixed;
-  bottom: 24px;
+  bottom: 80px;
   right: 24px;
   width: 64px;
   height: 64px;
@@ -1314,7 +1341,7 @@ body { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
   .floating-whatsapp {
     width: 56px;
     height: 56px;
-    bottom: 20px;
+    bottom: 70px;
     right: 20px;
   }
   
